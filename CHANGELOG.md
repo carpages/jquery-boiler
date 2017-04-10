@@ -1,10 +1,14 @@
 # CHANGELOG
 
+## v0.3.1
+
+  - Bump jQuery version
+
 ## v0.3.0
 
-- Bump jQuery version
-- Remove deprecated ‘.selector’ accessor
-- Update unit tests
+  - Bump jQuery version
+  - Remove deprecated ‘.selector’ accessor
+  - Update unit tests
 
 ## v0.2.3
 
