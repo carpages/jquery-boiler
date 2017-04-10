@@ -148,5 +148,5 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'test:saucelabs', [ 'connect', 'saucelabs-qunit' ]);
 
   // CI Task
-  grunt.registerTask( 'ci', [ 'eslint', 'test:all' ]);
+  grunt.registerTask( 'ci', [ 'eslint', 'test:qunit' ]);
 };
