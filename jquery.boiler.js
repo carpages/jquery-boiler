@@ -2,12 +2,14 @@
   if ( typeof define === 'function' && define.amd ) {
     // AMD. Register as an anonymous module.
     define([ 'jquery' ], factory );
-  } else if ( typeof module === 'object' && module.exports ) {
+  } else if ( typeof exports === 'object' ) {
     // Node/CommonJS
-    module.exports = factory( require( 'jquery' ));
+    module.exports = factory(
+      require( 'jquery' )
+    );
   } else {
     // Browser globals
-    factory( window.Zepto || jQuery );
+    factory( jQuery );
   }
 }( function( $ ) {
   'use strict';
@@ -17,7 +19,6 @@
       var args = Array.prototype.slice.call( arguments );
       var method = args[0];
       var options = args.slice( 1 );
-      var selector = this.selector;
 
       return this.each( function() {
         var cachedPlugin = $( this ).data( namespace );
@@ -30,9 +31,6 @@
           // cache the element
           plugin.el = this;
           plugin.$el = $( this );
-
-          // cache the initial selector
-          plugin._selector = selector;
 
           // cache the plugin
           plugin.$el.data( namespace, plugin );
