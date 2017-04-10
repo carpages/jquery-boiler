@@ -1,15 +1,16 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function( grunt ) {
   // Load all grunt tasks
-  require('load-grunt-tasks')(grunt);
+  require( 'load-grunt-tasks' )( grunt );
+
   // Show elapsed time at the end
-  require('time-grunt')(grunt);
+  require( 'time-grunt' )( grunt );
 
   // Project configuration.
   grunt.initConfig({
     // Metadata.
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON( 'package.json' ),
     banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
       '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
@@ -19,23 +20,18 @@ module.exports = function (grunt) {
     qunit: {
       all: {
         options: {
-          urls: ['http://localhost:9000/test/<%= pkg.name %>.html'],
-          page : {
-            viewportSize : { width: 1280, height: 800 }
+          urls: [ 'http://localhost:9000/test/<%= pkg.name %>.html' ],
+          page: {
+            viewportSize: { width: 1280, height: 800 }
           }
         }
       }
     },
-    jshint: {
+    eslint: {
       options: {
-        reporter: require('jshint-stylish')
+        config: '.eslintrc'
       },
-      src: {
-        options: {
-          jshintrc: './.jshintrc'
-        },
-        src: ['./jquery.boiler.js']
-      }
+      target: [ 'jquery.boiler.js' ]
     },
     connect: {
       tests: {
@@ -48,7 +44,7 @@ module.exports = function (grunt) {
     'saucelabs-qunit': {
       all: {
         options: {
-          urls: ['http://localhost:9000/test/<%= pkg.name %>.html'],
+          urls: [ 'http://localhost:9000/test/<%= pkg.name %>.html' ],
           build: process.env.TRAVIS_JOB_ID,
           browsers: [
             // iOS
@@ -137,8 +133,14 @@ module.exports = function (grunt) {
     }
   });
 
-  // Default task.
-  grunt.registerTask('default', ['jshint', 'connect', 'qunit']);
-  grunt.registerTask('saucelabs', ['connect', 'saucelabs-qunit']);
-  grunt.registerTask('ci', ['jshint', 'connect', 'qunit', 'saucelabs-qunit']);
+  // Default Task
+  grunt.registerTask( 'default', [ 'eslint', 'test:qunit' ]);
+
+  // Testing Tasks
+  grunt.registerTask( 'test:all', [ 'connect', 'qunit', 'saucelabs-qunit' ]);
+  grunt.registerTask( 'test:qunit', [ 'connect', 'qunit' ]);
+  grunt.registerTask( 'test:saucelabs', [ 'connect', 'saucelabs-qunit' ]);
+
+  // CI Task
+  grunt.registerTask( 'ci', [ 'eslint', 'test:all' ]);
 };
