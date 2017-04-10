@@ -9,6 +9,7 @@ module.exports = function( grunt ) {
 
   // Project configuration.
   grunt.initConfig({
+
     // Metadata.
     pkg: grunt.file.readJSON( 'package.json' ),
     banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -16,23 +17,26 @@ module.exports = function( grunt ) {
       '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed MIT */\n',
+
     // Task configuration.
     qunit: {
       all: {
         options: {
-          urls: [ 'http://localhost:9000/test/<%= pkg.name %>.html' ],
+          urls: [ 'http://localhost:9000/test/<%= pkg.name %>.test.html' ],
           page: {
             viewportSize: { width: 1280, height: 800 }
           }
         }
       }
     },
+
     eslint: {
       options: {
         config: '.eslintrc'
       },
       target: [ 'jquery.boiler.js' ]
     },
+
     connect: {
       tests: {
         options: {
@@ -41,11 +45,13 @@ module.exports = function( grunt ) {
         }
       }
     },
+
     'saucelabs-qunit': {
       all: {
         options: {
-          urls: [ 'http://localhost:9000/test/<%= pkg.name %>.html' ],
+          urls: [ 'http://localhost:9000/test/<%= pkg.name %>.test.html' ],
           build: process.env.TRAVIS_JOB_ID,
+          testname: '<%= pkg.name %>',
           browsers: [
             // iOS
             {

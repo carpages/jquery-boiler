@@ -1,92 +1,95 @@
-/*
- * Added for Saucelabs
- * https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
- */
-var log = [];
-var testName;
+require([ 'qunit', 'jquery', 'jquery.boiler' ], function( QUnit, $ ) {
+  /*
+  * Added for Saucelabs
+  * https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
+  */
+  var log = [];
+  var testName;
 
-QUnit.done( function( test_results ) {
-  var tests = [];
-  for ( var i = 0, len = log.length; i < len; i++ ) {
-    var details = log[i];
-    tests.push({
-      name: details.name,
-      result: details.result,
-      expected: details.expected,
-      actual: details.actual,
-      source: details.source
-    });
-  }
-  test_results.tests = tests;
-
-  window.global_test_results = test_results;
-});
-QUnit.testStart( function( testDetails ) {
-  QUnit.log( function( details ) {
-    if ( !details.result ) {
-      details.name = testDetails.name;
-      log.push( details );
+  QUnit.done( function( test_results ) {
+    var tests = [];
+    for ( var i = 0, len = log.length; i < len; i++ ) {
+      var details = log[i];
+      tests.push({
+        name: details.name,
+        result: details.result,
+        expected: details.expected,
+        actual: details.actual,
+        source: details.source
+      });
     }
-  });
-});
+    test_results.tests = tests;
 
-( function( $ ) {
+    window.global_test_results = test_results;
+  });
+
+  QUnit.testStart( function( testDetails ) {
+    QUnit.log( function( details ) {
+      if ( !details.result ) {
+        details.name = testDetails.name;
+        log.push( details );
+      }
+    });
+  });
+
   /*
     ======== A Handy Little QUnit Reference ========
     http://api.qunitjs.com/
 
     Test methods:
-      module(name, {[setup][ ,teardown]})
-      test(name, callback)
-      expect(numberOfAssertions)
-      stop(increment)
-      start(decrement)
+      QUnit.module(name, {[beforeEach], [afterEach]})
+      QUnit.test(name, callbaassertck)
+      QUnit.expect(numberOfAssertions)
+      QUnit.stop(increment)
+      QUnit.start(decrement)
     Test assertions:
-      ok(value, [message])
-      equal(actual, expected, [message])
-      notEqual(actual, expected, [message])
-      deepEqual(actual, expected, [message])
-      notDeepEqual(actual, expected, [message])
-      strictEqual(actual, expected, [message])
-      notStrictEqual(actual, expected, [message])
-      throws(block, [expected], [message])
+      assert.ok(value, [message])
+      assert.equal(actual, expected, [message])
+      assert.notEqual(actual, expected, [message])
+      assert.deepEqual(actual, expected, [message])
+      assert.notDeepEqual(actual, expected, [message])
+      assert.strictEqual(actual, expected, [message])
+      assert.notStrictEqual(actual, expected, [message])
+      assert.throws(block, [expected], [message])
   */
 
-  module( 'Basic Plugin Functionality', {
+  QUnit.start();
+
+  QUnit.module( 'Basic Plugin Functionality', {
     // This will run before each test in this module.
-    setup: function() {
+    beforeEach: function() {
       this.$el1 = $( '#js-test-1' );
       this.$el2 = $( '#js-test-2' );
       this.$els = $( '.js-test' );
 
       $.boiler( 'test', {});
     },
-    teardown: function() {
+    afterEach: function() {
       this.$els.removeData( 'test' );
     }
   });
 
-  test( 'Added to fn namespace', function() {
-    expect( 1 );
+  QUnit.test( 'Added to fn namespace', function( assert ) {
+    assert.expect( 1 );
 
-    ok( !!$.fn.test );
+    assert.ok( !!$.fn.test );
   });
 
-  test( 'Chainable', function() {
-    expect( 1 );
+  QUnit.test( 'Chainable', function( assert ) {
+    assert.expect( 1 );
 
-    strictEqual( this.$els.test(), this.$els );
+    assert.strictEqual( this.$els.test(), this.$els );
   });
 
-  test( 'Plugin cached in elements data attribute', function() {
-    expect( 1 );
+  QUnit.test( 'Plugin cached in elements data attribute', function( assert ) {
+    assert.expect( 1 );
 
     this.$el1.test();
-    ok( !!this.$el1.data( 'test' ));
+    assert.ok( !!this.$el1.data( 'test' ));
   });
 
-  test( 'Plugin applied to each element in a group', function() {
-    expect( 1 );
+  QUnit.test( 'Plugin applied to each element in a group', function( assert ) {
+    assert.expect( 1 );
 
     var isOk = true;
 
@@ -98,57 +101,49 @@ QUnit.testStart( function( testDetails ) {
       }
     });
 
-    ok( isOk );
+    assert.ok( isOk );
   });
 
-  test( 'Each instance of plugin is seperate', function() {
-    expect( 1 );
+  QUnit.test( 'Each instance of plugin is seperate', function( assert ) {
+    assert.expect( 1 );
 
     this.$els.test();
 
-    notStrictEqual( this.$el1.data( 'test' ), this.$el2.data( 'test' ));
+    assert.notStrictEqual( this.$el1.data( 'test' ), this.$el2.data( 'test' ));
   });
 
   /*
    *
    */
 
-  module( 'Caching Dom Objects', {
+  QUnit.module( 'Caching Dom Objects', {
     // This will run before each test in this module.
-    setup: function() {
+    beforeEach: function() {
       this.$el = $( '#js-test-1' );
 
       $.boiler( 'test', {});
     },
-    teardown: function() {
+    afterEach: function() {
       this.$el.removeData( 'test' );
     }
   });
 
-  test( 'Dom element is cached', function() {
-    expect( 2 );
+  QUnit.test( 'Dom element is cached', function( assert ) {
+    assert.expect( 2 );
 
     this.$el.test();
 
-    strictEqual( this.$el[0], this.$el.data( 'test' ).$el[0]);
-    strictEqual( this.$el[0], this.$el.data( 'test' ).el );
-  });
-
-  test( 'Original selector is cached', function() {
-    expect( 1 );
-
-    this.$el.test();
-
-    strictEqual( this.$el.data( 'test' )._selector, '#js-test-1' );
+    assert.strictEqual( this.$el[0], this.$el.data( 'test' ).$el[0]);
+    assert.strictEqual( this.$el[0], this.$el.data( 'test' ).el );
   });
 
   /*
    *
    */
 
-  module( 'Plugin Methods and Variables', {
+  QUnit.module( 'Plugin Methods and Variables', {
     // This will run before each test in this module.
-    setup: function() {
+    beforeEach: function() {
       this.$el = $( '<div>' );
 
       $.boiler( 'test', {
@@ -167,47 +162,47 @@ QUnit.testStart( function( testDetails ) {
 
       this.$el.test();
     },
-    teardown: function() {
+    afterEach: function() {
       this.$el.removeData( 'test' );
     }
   });
 
-  test( 'Plugin object gives access to passed objects', function() {
-    expect( 2 );
+  QUnit.test( 'Plugin object gives access to passed objects', function( assert ) {
+    assert.expect( 2 );
 
-    strictEqual( this.$el.data( 'test' ).pub, 'public' );
-    strictEqual( this.$el.data( 'test' ).exclaim( 'itemTwo' ), 'itemTwo!' );
+    assert.strictEqual( this.$el.data( 'test' ).pub, 'public' );
+    assert.strictEqual( this.$el.data( 'test' ).exclaim( 'itemTwo' ), 'itemTwo!' );
   });
 
-  test( 'Easily set public variables', function() {
-    expect( 1 );
+  QUnit.test( 'Easily set public variables', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.test( 'pub', 'foo' );
 
-    strictEqual( this.$el.data( 'test' ).pub, 'foo' );
+    assert.strictEqual( this.$el.data( 'test' ).pub, 'foo' );
   });
 
-  test( "'this' gives context to plugin within method", function() {
-    expect( 1 );
+  QUnit.test( "'this' gives context to plugin within method", function( assert ) {
+    assert.expect( 1 );
 
-    strictEqual( this.$el.data( 'test' ).getThis(), this.$el.data( 'test' ));
+    assert.strictEqual( this.$el.data( 'test' ).getThis(), this.$el.data( 'test' ));
   });
 
-  test( 'Easily call methods', function() {
-    expect( 1 );
+  QUnit.test( 'Easily call methods', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.test( 'setText', 'Hello World!' );
 
-    strictEqual( this.$el.text(), 'Hello World!' );
+    assert.strictEqual( this.$el.text(), 'Hello World!' );
   });
 
   /*
    *
    */
 
-  module( 'Settings', {
+  QUnit.module( 'Settings', {
     // This will run before each test in this module.
-    setup: function() {
+    beforeEach: function() {
       this.$el = $( '#js-test-1' );
 
       $.boiler( 'test', {
@@ -219,54 +214,54 @@ QUnit.testStart( function( testDetails ) {
         data: [ 'one' ]
       });
     },
-    teardown: function() {
+    afterEach: function() {
       this.$el.removeData( 'test' );
     }
   });
 
-  test( 'Defaults are cached', function() {
-    expect( 1 );
+  QUnit.test( 'Defaults are cached', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.test();
 
-    deepEqual( this.$el.data( 'test' ).defaults, {
+    assert.deepEqual( this.$el.data( 'test' ).defaults, {
       one: '1',
       two: '2',
       three: '3'
     });
   });
 
-  test( 'Data attributes are cached', function() {
-    expect( 1 );
+  QUnit.test( 'Data attributes are cached', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.test();
 
-    deepEqual( this.$el.data( 'test' ).data, {
+    assert.deepEqual( this.$el.data( 'test' ).data, {
       one: 'ONE'
     });
   });
 
-  test( 'User options are cached', function() {
-    expect( 1 );
+  QUnit.test( 'User options are cached', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.test({
       foo: 'bar'
     });
 
-    deepEqual( this.$el.data( 'test' ).options, {
+    assert.deepEqual( this.$el.data( 'test' ).options, {
       foo: 'bar'
     });
   });
 
-  test( 'Settings properly give priority to data > options > defaults', function() {
-    expect( 1 );
+  QUnit.test( 'Settings properly give priority to data > options > defaults', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.test({
       one: 'one',
       two: 'two'
     });
 
-    deepEqual( this.$el.data( 'test' ).settings, {
+    assert.deepEqual( this.$el.data( 'test' ).settings, {
       one: 'ONE',
       two: 'two',
       three: '3'
@@ -277,18 +272,18 @@ QUnit.testStart( function( testDetails ) {
    *
    */
 
-  module( 'Events', {
+  QUnit.module( 'Events', {
     // This will run before each test in this module.
-    setup: function() {
+    beforeEach: function() {
       this.$el = $( '<div>' );
     },
-    teardown: function() {
+    afterEach: function() {
       this.$el.removeData( 'test' );
     }
   });
 
-  test( 'Events run properly', function() {
-    expect( 2 );
+  QUnit.test( 'Events run properly', function( assert ) {
+    assert.expect( 2 );
 
     $.boiler( 'test', {
       events: {
@@ -307,14 +302,14 @@ QUnit.testStart( function( testDetails ) {
     this.$el.test();
 
     this.$el.trigger( 'click' );
-    strictEqual( this.$el.data( 'test' ).foo, 'click' );
+    assert.strictEqual( this.$el.data( 'test' ).foo, 'click' );
 
     this.$el.trigger( 'mouseenter' );
-    strictEqual( this.$el.data( 'test' ).foo, 'hover' );
+    assert.strictEqual( this.$el.data( 'test' ).foo, 'hover' );
   });
 
-  test( 'Propogated events run properly', function() {
-    expect( 3 );
+  QUnit.test( 'Propogated events run properly', function( assert ) {
+    assert.expect( 3 );
 
     $.boiler( 'test', {
       events: {
@@ -330,8 +325,8 @@ QUnit.testStart( function( testDetails ) {
     $( '#js-target-2' ).click();
     $( '#js-target-3' ).click();
 
-    ok( $( '#js-target-1' ).hasClass( 'is-clicked' ));
-    ok( !$( '#js-target-2' ).hasClass( 'is-clicked' ));
-    ok( $( '#js-target-3' ).hasClass( 'is-clicked' ));
+    assert.ok( $( '#js-target-1' ).hasClass( 'is-clicked' ));
+    assert.ok( !$( '#js-target-2' ).hasClass( 'is-clicked' ));
+    assert.ok( $( '#js-target-3' ).hasClass( 'is-clicked' ));
   });
-}( jQuery ));
+});
