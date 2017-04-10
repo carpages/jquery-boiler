@@ -11,10 +11,10 @@
     "jquery-boilerplate"
   ],
   "homepage": "https://github.com/mattdrose/jquery-boiler",
-  "author": {
-    "name": "Matt Rose",
-    "url": "http://mattrose.ca"
-  },
+  "authors": [
+    "Matt Rose <matt@mattrose.ca> (http://mattrose.ca)",
+    "Jeff Andrews <jeffandrews@me.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/mattdrose/jquery-boiler.git"

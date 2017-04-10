@@ -1,15 +1,14 @@
 {
-  "name": "jquery-boiler",
+  "name": "@carpages/jquery-boiler",
   "version": "0.2.3",
   "description": "A jQuery plugin to help you quickly write custom jQuery plugins",
-  "author": {
-    "name": "Matt Rose",
-    "email": "matt@mattrose.ca",
-    "url": "http://mattrose.ca"
-  },
+  "author": "Matt Rose <matt@mattrose.ca> (http://mattrose.ca)",
+  "contributors": [
+    "Jeff Andrews <jeffandrews@me.com>"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mattdrose/jquery-boiler"
+    "url": "https://github.com/carpages/jquery-boiler"
   },
   "main": "jquery.boiler.js",
   "dependencies": {
