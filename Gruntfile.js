@@ -57,85 +57,46 @@ module.exports = function( grunt ) {
           build: process.env.TRAVIS_JOB_ID,
           testname: '<%= pkg.name %>',
           browsers: [
-            // iOS
+            // Mobile
             {
-              browserName: 'iphone',
-              platform: 'OS X 10.9',
-              version: '7.1'
+              browserName: 'iphone'
+            }, {
+              browserName: 'android'
             },
-            {
-              browserName: 'ipad',
-              platform: 'OS X 10.9',
-              version: '7.1'
-            },
-            // Android
-            {
-              browserName: 'android',
-              platform: 'Linux',
-              version: '4.3'
-            },
-            // OS X
+
+            // Safari
             {
               browserName: 'safari',
-              platform: 'OS X 10.9',
-              version: '7'
-            },
-            {
+              version: '10'
+            }, {
               browserName: 'safari',
-              platform: 'OS X 10.8',
-              version: '6'
-            },
-            {
-              browserName: 'firefox',
-              platform: 'OS X 10.9',
-              version: '28'
-            },
-            // Windows
-            {
-              browserName: 'internet explorer',
-              platform: 'Windows 8.1',
-              version: '11'
-            },
-            {
-              browserName: 'internet explorer',
-              platform: 'Windows 8',
-              version: '10'
-            },
-            {
-              browserName: 'internet explorer',
-              platform: 'Windows 7',
-              version: '11'
-            },
-            {
-              browserName: 'internet explorer',
-              platform: 'Windows 7',
-              version: '10'
-            },
-            {
-              browserName: 'internet explorer',
-              platform: 'Windows 7',
               version: '9'
-            },
-            {
-              browserName: 'internet explorer',
-              platform: 'Windows 7',
+            }, {
+              browserName: 'safari',
               version: '8'
             },
+
+            // Firefox
             {
+              platform: 'mac 10.12',
               browserName: 'firefox',
-              platform: 'Windows 7',
-              version: '29'
+              version: 'latest'
             },
+
+            // Chrome
             {
+              platform: 'mac 10.12',
               browserName: 'chrome',
-              platform: 'Windows 7',
-              version: '34'
+              version: 'latest'
             },
-            // Linux
+
+            // IE
             {
-              browserName: 'firefox',
-              platform: 'Linux',
-              version: '29'
+              browserName: 'internet explorer',
+              version: 'latest'
+            }, {
+              browserName: 'internet explorer',
+              version: '10'
             }
           ]
         }
@@ -152,5 +113,5 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'test:saucelabs', [ 'connect', 'saucelabs-qunit' ]);
 
   // CI Task
-  grunt.registerTask( 'ci', [ 'eslint', 'test:qunit' ]);
+  grunt.registerTask( 'ci', [ 'eslint', 'test:all' ]);
 };
