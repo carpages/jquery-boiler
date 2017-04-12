@@ -4,8 +4,8 @@ node_js:
   - '6'
 
 before_script:
+  - npm install -g grunt-cli bower
   - bower install
-  - npm install -g grunt-cli
 
 script: grunt ci --verbose
 
