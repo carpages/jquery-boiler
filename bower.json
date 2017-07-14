@@ -22,17 +22,12 @@
   "bugs": "https://github.com/mattdrose/jquery-boiler/issues",
   "license": "MIT",
   "main": "jquery.boiler.js",
-  "ignore": [
-    "test",
-    "Gruntfile.js",
-    "package.json",
-    "*.md"
-  ],
+  "ignore": ["test", "Gruntfile.js", "package.json", "*.md"],
   "dependencies": {
-    "jquery": "~3"
+    "jquery": ">=1.6"
   },
   "devDependencies": {
-    "qunit": "~2",
-    "requirejs": "~2"
+    "qunit": "2.x",
+    "requirejs": "2.x"
   }
 }
