@@ -8,7 +8,6 @@
  */
 
 $.boiler( 'tooltip', {
-
   /* The default settings for the plugin. These can be overwritten by the
      options passed on initiation. */
   defaults: {
@@ -34,12 +33,11 @@ $.boiler( 'tooltip', {
     var plugin = this;
 
     /* cache */
-    plugin.$wrapper =
-      $( '<div/>' ).addClass( 'js-tooltip__wrapper' );
+    plugin.$wrapper = $( '<div/>' ).addClass( 'js-tooltip__wrapper' );
 
-    plugin.$tip =
-      $( '<div/>' ).addClass( 'js-tooltip__tip' )
-                 .html( plugin.settings.tip );
+    plugin.$tip = $( '<div/>' )
+      .addClass( 'js-tooltip__tip' )
+      .html( plugin.settings.tip );
 
     /* plugin.el and plugin.$el are references to the dom element. */
     plugin.$el.wrap( plugin.$wrapper );

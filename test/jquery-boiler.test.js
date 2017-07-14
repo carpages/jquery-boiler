@@ -253,20 +253,23 @@ require([ 'qunit', 'jquery', 'jquery.boiler' ], function( QUnit, $ ) {
     });
   });
 
-  QUnit.test( 'Settings properly give priority to data > options > defaults', function( assert ) {
-    assert.expect( 1 );
+  QUnit.test(
+    'Settings properly give priority to data > options > defaults',
+    function( assert ) {
+      assert.expect( 1 );
 
-    this.$el.test({
-      one: 'one',
-      two: 'two'
-    });
+      this.$el.test({
+        one: 'one',
+        two: 'two'
+      });
 
-    assert.deepEqual( this.$el.data( 'test' ).settings, {
-      one: 'ONE',
-      two: 'two',
-      three: '3'
-    });
-  });
+      assert.deepEqual( this.$el.data( 'test' ).settings, {
+        one: 'ONE',
+        two: 'two',
+        three: '3'
+      });
+    }
+  );
 
   /*
    *
@@ -287,8 +290,8 @@ require([ 'qunit', 'jquery', 'jquery.boiler' ], function( QUnit, $ ) {
 
     $.boiler( 'test', {
       events: {
-        'click': 'onClick',
-        'mouseenter': 'onHover'
+        click: 'onClick',
+        mouseenter: 'onHover'
       },
       foo: 'bar',
       onClick: function() {

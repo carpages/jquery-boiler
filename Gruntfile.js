@@ -9,10 +9,10 @@ module.exports = function( grunt ) {
 
   // Project configuration.
   grunt.initConfig({
-
     // Metadata.
     pkg: grunt.file.readJSON( 'package.json' ),
-    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+    banner:
+      '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
       '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
@@ -60,7 +60,8 @@ module.exports = function( grunt ) {
             // Mobile
             {
               browserName: 'iphone'
-            }, {
+            },
+            {
               browserName: 'android'
             },
 
@@ -68,10 +69,12 @@ module.exports = function( grunt ) {
             {
               browserName: 'safari',
               version: '10'
-            }, {
+            },
+            {
               browserName: 'safari',
               version: '9'
-            }, {
+            },
+            {
               browserName: 'safari',
               version: '8'
             },
@@ -94,7 +97,8 @@ module.exports = function( grunt ) {
             {
               browserName: 'internet explorer',
               version: 'latest'
-            }, {
+            },
+            {
               browserName: 'internet explorer',
               version: '10'
             }

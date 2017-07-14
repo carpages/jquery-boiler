@@ -4,14 +4,12 @@
     define([ 'jquery' ], factory );
   } else if ( typeof exports === 'object' ) {
     // Node/CommonJS
-    module.exports = factory(
-      require( 'jquery' )
-    );
+    module.exports = factory( require( 'jquery' ));
   } else {
     // Browser globals
     factory( jQuery );
   }
-}( function( $ ) {
+})( function( $ ) {
   'use strict';
 
   $.boiler = function( namespace, base ) {
@@ -48,7 +46,8 @@
           }
 
           // overwrite options with data and defaults
-          plugin.settings = $.extend({},
+          plugin.settings = $.extend(
+            {},
             plugin.defaults,
             plugin.options,
             plugin.data
@@ -73,7 +72,7 @@
           // if method is a function
           if ( typeof cachedPlugin[method] === 'function' ) {
             cachedPlugin[method].apply( cachedPlugin, options );
-          // otherwise, treat it as a propery and reset it
+            // otherwise, treat it as a propery and reset it
           } else {
             cachedPlugin[method] = options[0];
           }
@@ -83,4 +82,4 @@
   };
 
   return $;
-}));
+});

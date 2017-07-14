@@ -3,7 +3,6 @@
  */
 
 $.boiler( 'pluginName', {
-
   defaults: {},
 
   events: {},
@@ -21,5 +20,4 @@ $.boiler( 'pluginName', {
   publicMethod: function() {
     var plugin = this;
   }
-
 });
