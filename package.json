@@ -1,6 +1,6 @@
 {
   "name": "@carpages/jquery-boiler",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "A jQuery plugin to help you quickly write custom jQuery plugins",
   "author": "Matt Rose <matt@mattrose.ca> (http://mattrose.ca)",
   "contributors": [
