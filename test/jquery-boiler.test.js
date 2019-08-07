@@ -1,8 +1,8 @@
 require([ 'qunit', 'jquery', 'jquery.boiler' ], function( QUnit, $ ) {
   /*
-  * Added for Saucelabs
-  * https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
-  */
+   * Added for Saucelabs
+   * https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
+   */
   var log = [];
   var testName;
 
@@ -253,23 +253,20 @@ require([ 'qunit', 'jquery', 'jquery.boiler' ], function( QUnit, $ ) {
     });
   });
 
-  QUnit.test(
-    'Settings properly give priority to data > options > defaults',
-    function( assert ) {
-      assert.expect( 1 );
+  QUnit.test( 'Settings properly give priority to data > options > defaults', function( assert ) {
+    assert.expect( 1 );
 
-      this.$el.test({
-        one: 'one',
-        two: 'two'
-      });
+    this.$el.test({
+      one: 'one',
+      two: 'two'
+    });
 
-      assert.deepEqual( this.$el.data( 'test' ).settings, {
-        one: 'ONE',
-        two: 'two',
-        three: '3'
-      });
-    }
-  );
+    assert.deepEqual( this.$el.data( 'test' ).settings, {
+      one: 'ONE',
+      two: 'two',
+      three: '3'
+    });
+  });
 
   /*
    *

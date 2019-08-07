@@ -1,6 +1,6 @@
 module.exports = {
-  extends: "carpages",
+  extends: 'carpages/rules/dsp',
   rules: {
-    "no-useless-call": "off"
+    'no-useless-call': 'off'
   }
 };

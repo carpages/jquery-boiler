@@ -1,11 +1,13 @@
 language: node_js
 
 node_js:
-  - '6'
+  - '8'
+  - '10'
+  - '12'
 
 before_script:
   - npm install -g grunt-cli bower
-  - bower install
+  - bower update
 
 script: grunt ci --verbose
 

@@ -46,12 +46,7 @@
           }
 
           // overwrite options with data and defaults
-          plugin.settings = $.extend(
-            {},
-            plugin.defaults,
-            plugin.options,
-            plugin.data
-          );
+          plugin.settings = $.extend({}, plugin.defaults, plugin.options, plugin.data );
 
           // check for events
           if ( plugin.events ) {

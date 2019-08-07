@@ -22,11 +22,8 @@ module.exports = function( grunt ) {
     qunit: {
       all: {
         options: {
-          inject: [
-            './test/qunit.config.js',
-            './node_modules/grunt-contrib-qunit/phantomjs/bridge.js'
-          ],
-          urls: [ 'http://localhost:9000/test/<%= pkg.name %>.test.html' ],
+          inject: [ './test/qunit.config.js', './node_modules/grunt-contrib-qunit/chrome/bridge.js' ],
+          urls: [ 'http://localhost:9000/test/jquery-boiler.test.html' ],
           page: {
             viewportSize: { width: 1280, height: 800 }
           }
@@ -35,9 +32,6 @@ module.exports = function( grunt ) {
     },
 
     eslint: {
-      options: {
-        config: '.eslintrc'
-      },
       target: [ 'jquery.boiler.js' ]
     },
 
@@ -48,63 +42,6 @@ module.exports = function( grunt ) {
           port: 9000
         }
       }
-    },
-
-    'saucelabs-qunit': {
-      all: {
-        options: {
-          urls: [ 'http://localhost:9000/test/<%= pkg.name %>.test.html' ],
-          build: process.env.TRAVIS_JOB_ID,
-          testname: '<%= pkg.name %>',
-          browsers: [
-            // Mobile
-            {
-              browserName: 'iphone'
-            },
-            {
-              browserName: 'android'
-            },
-
-            // Safari
-            {
-              browserName: 'safari',
-              version: '10'
-            },
-            {
-              browserName: 'safari',
-              version: '9'
-            },
-            {
-              browserName: 'safari',
-              version: '8'
-            },
-
-            // Firefox
-            {
-              platform: 'mac 10.12',
-              browserName: 'firefox',
-              version: 'latest'
-            },
-
-            // Chrome
-            {
-              platform: 'mac 10.12',
-              browserName: 'chrome',
-              version: 'latest'
-            },
-
-            // IE
-            {
-              browserName: 'internet explorer',
-              version: 'latest'
-            },
-            {
-              browserName: 'internet explorer',
-              version: '10'
-            }
-          ]
-        }
-      }
     }
   });
 
@@ -112,9 +49,8 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'default', [ 'eslint', 'test:qunit' ]);
 
   // Testing Tasks
-  grunt.registerTask( 'test:all', [ 'connect', 'qunit', 'saucelabs-qunit' ]);
+  grunt.registerTask( 'test:all', [ 'connect', 'qunit' ]);
   grunt.registerTask( 'test:qunit', [ 'connect', 'qunit' ]);
-  grunt.registerTask( 'test:saucelabs', [ 'connect', 'saucelabs-qunit' ]);
 
   // CI Task
   grunt.registerTask( 'ci', [ 'eslint', 'test:all' ]);
