@@ -1,18 +1,6 @@
-( function( factory ) {
-  if ( typeof define === 'function' && define.amd ) {
-    // AMD. Register as an anonymous module.
-    define([ 'jquery' ], factory );
-  } else if ( typeof exports === 'object' ) {
-    // Node/CommonJS
-    module.exports = factory( require( 'jquery' ));
-  } else {
-    // Browser globals
-    factory( jQuery );
-  }
-})( function( $ ) {
-  'use strict';
+import $ from 'jquery';
 
-  $.boiler = function( namespace, base ) {
+$.boiler = function( namespace, base ) {
     $.fn[namespace] = function() {
       var args = Array.prototype.slice.call( arguments );
       var method = args[0];
@@ -76,5 +64,4 @@
     };
   };
 
-  return $;
-});
+  export default $;
