@@ -11,8 +11,13 @@
         "url": "https://github.com/carpages/jquery-boiler"
     },
     "main": "dist/jquery.boiler.js",
+    "files": [
+        "dist",
+        "jquery.boiler.js"
+    ],
     "scripts": {
-        "build": "rollup -c"
+        "build": "rollup -c",
+        "prepublish": "yarn build"
     },
     "dependencies": {
         "jquery": "^4.0.0"
