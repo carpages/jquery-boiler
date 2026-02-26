@@ -1,30 +1,41 @@
 {
-  "name": "@carpages/jquery-boiler",
-  "version": "0.6.0-alpha.1",
-  "description": "A jQuery plugin to help you quickly write custom jQuery plugins",
-  "author": "Matt Rose <matt@mattrose.ca> (http://mattrose.ca)",
-  "contributors": [
-    "Jeff Andrews <jeffandrews@me.com>"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/carpages/jquery-boiler"
-  },
-  "main": "jquery.boiler.js",
-  "dependencies": {
-    "jquery": "3.x"
-  },
-  "devDependencies": {
-    "eslint": "5.16.x",
-    "eslint-config-carpages": "3.x",
-    "eslint-plugin-qunit": "^4.0.0",
-    "grunt": "^1.0.1",
-    "grunt-contrib-connect": "^2.0.0",
-    "grunt-contrib-qunit": "^3.1.0",
-    "grunt-eslint": "^22.0.0",
-    "grunt-saucelabs": "^9.0.0",
-    "load-grunt-tasks": "^5.1.0",
-    "time-grunt": "^2.0.0"
-  },
-  "license": "MIT"
+    "name": "@carpages/jquery-boiler",
+    "version": "0.6.0-alpha.1",
+    "description": "A jQuery plugin to help you quickly write custom jQuery plugins",
+    "author": "Matt Rose <matt@mattrose.ca> (http://mattrose.ca)",
+    "contributors": [
+        "Jeff Andrews <jeffandrews@me.com>"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/carpages/jquery-boiler"
+    },
+    "main": "dist/jquery.boiler.js",
+    "scripts": {
+        "build": "rollup -c"
+    },
+    "dependencies": {
+        "jquery": "^4.0.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.29.0",
+        "@babel/eslint-parser": "^7.28.6",
+        "@babel/preset-env": "^7.29.0",
+        "@eslint/compat": "^2.0.2",
+        "@eslint/eslintrc": "^3.3.4",
+        "@eslint/js": "^9.39.3",
+        "@rollup/plugin-babel": "^6.1.0",
+        "@rollup/plugin-commonjs": "^29.0.0",
+        "@rollup/plugin-inject": "^5.0.5",
+        "@rollup/plugin-node-resolve": "^16.0.3",
+        "@rollup/plugin-terser": "^0.4.4",
+        "eslint": "^9.39.3",
+        "eslint-config-carpages": "^8.1.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.5",
+        "eslint-plugin-qunit": "^8.2.6",
+        "prettier": "^3.8.1",
+        "rollup": "^4.59.0"
+    },
+    "license": "MIT"
 }

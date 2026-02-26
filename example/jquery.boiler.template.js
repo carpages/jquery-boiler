@@ -2,22 +2,22 @@
  * This is a starting template for creating jQuery plugins with jquery.boiler
  */
 
-$.boiler( 'pluginName', {
+$.boiler('pluginName', {
   defaults: {},
 
   events: {},
 
   data: [],
 
-  init: function() {
-    var plugin = this;
+  init: function () {
+    // const plugin = this;
   },
 
-  _privateMethod: function() {
-    var plugin = this;
+  _privateMethod: function () {
+    // const plugin = this;
   },
 
-  publicMethod: function() {
-    var plugin = this;
-  }
+  publicMethod: function () {
+    // const plugin = this;
+  },
 });

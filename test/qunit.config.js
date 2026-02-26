@@ -1,8 +1,11 @@
+/* global requirejs */
+
 // Require config
 requirejs.config({
-  baseUrl: '../',
+  baseUrl: '.',
   paths: {
-    qunit: 'bower_components/qunit/qunit/qunit',
-    jquery: 'bower_components/jquery/dist/jquery'
-  }
+    qunit: 'node_modules/qunit/qunit/qunit',
+    jquery: 'node_modules/jquery/dist/jquery',
+    'jquery.boiler': '../dist/jquery.boiler',
+  },
 });
