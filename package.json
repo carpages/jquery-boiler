@@ -16,8 +16,7 @@
         "jquery.boiler.js"
     ],
     "scripts": {
-        "build": "rollup -c",
-        "prepublish": "yarn build"
+        "build": "rollup -c"
     },
     "dependencies": {
         "jquery": "^4.0.0"
@@ -41,6 +40,9 @@
         "eslint-plugin-qunit": "^8.2.6",
         "prettier": "^3.8.1",
         "rollup": "^4.59.0"
+    },
+    "publishConfig": {
+        "access": "public"
     },
     "license": "MIT"
 }
