@@ -1,15 +1,12 @@
-import { fileURLToPath } from 'node:url';
+import { URL, fileURLToPath } from 'node:url';
 
 import { defineConfig } from 'eslint/config';
 import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
 import { includeIgnoreFile } from '@eslint/compat';
 import babelParser from '@babel/eslint-parser';
+import carpagesConfig from 'eslint-config-carpages/flat';
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
-const compat = new FlatCompat({
-  baseDirectory: fileURLToPath(new URL('.', import.meta.url)),
-});
 
 export default defineConfig([
   {
@@ -28,6 +25,6 @@ export default defineConfig([
   },
 
   includeIgnoreFile(gitignorePath, 'Imported .gitignore patterns'),
-  ...compat.extends('carpages'),
+  carpagesConfig,
   js.configs.recommended,
 ]);
